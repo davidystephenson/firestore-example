@@ -1,15 +1,11 @@
-import admin from 'firebase-admin'
-import { config } from 'firebase-functions'
+import { firestore } from 'firebase-admin'
+import store from './store'
 
-const { firebase } = config()
-admin.initializeApp(firebase)
-const store = admin.firestore()
-
-export default function addItem (
+export default async function addItem (
   { x }: { x: string }
-): void {
+): Promise<firestore.WriteResult> {
   const collection = store.collection('items')
   const document = collection.doc()
 
-  document.set({ x })
+  return await document.set({ x })
 }

@@ -121,17 +121,31 @@ function App (): JSX.Element {
     setSum(response.data)
   }
 
+  async function reset (): Promise<void> {
+    const resetItems = functions.httpsCallable('resetItems')
+
+    await resetItems()
+  }
+
   return (
     <main>
       <button onClick={hello}>Hello</button>
 
-      <h1>Xs</h1>
-
-      {paragraphs}
+      <h1>
+        Items
+        {' '}
+        <button onClick={reset}>Reset</button>
+      </h1>
 
       <form onSubmit={addItem}>
-        <input value={x} onChange={changeX} placeholder='Add item' />
+        <input
+          value={x}
+          onChange={changeX}
+          placeholder='Add item'
+        />
       </form>
+
+      {paragraphs}
 
       <h1>Sum</h1>
 
@@ -150,6 +164,7 @@ function App (): JSX.Element {
         />
         <button>Add</button>
       </form>
+
       <p>{sum}</p>
     </main>
   )
