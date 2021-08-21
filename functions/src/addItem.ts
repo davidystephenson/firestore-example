@@ -1,11 +1,15 @@
 import { firestore } from 'firebase-admin'
-import store from './store'
+import store, { serverTimestamp } from './store'
 
+// app.get('/add-item/')
 export default async function addItem (
-  { x }: { x: string }
+  { x }: { x: string } // req.body === { x: string }
 ): Promise<firestore.WriteResult> {
   const collection = store.collection('items')
   const document = collection.doc()
 
-  return await document.set({ x })
+  const createdAt = serverTimestamp()
+  const data = { x, createdAt }
+  
+  return await document.set(data)
 }

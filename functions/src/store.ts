@@ -1,8 +1,10 @@
-import admin from 'firebase-admin'
+import { firestore, initializeApp } from 'firebase-admin'
 import { config } from 'firebase-functions'
 
+export const { serverTimestamp } = firestore.FieldValue
+
 const { firebase } = config()
-admin.initializeApp(firebase)
-const store = admin.firestore()
+initializeApp(firebase)
+const store = firestore()
 
 export default store

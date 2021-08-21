@@ -1,3 +1,4 @@
 export default function helloWorld (): string {
-  return 'hello world'
+  const now = Date.now()
+  return `hello world ${now}`
 }
